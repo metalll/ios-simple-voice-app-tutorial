@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keJ-ps-q0f">
+                                <rect key="frame" x="20" y="70" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F4O-3C-sfT">
+                                <rect key="frame" x="20" y="99" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R85-vg-S2H">
+                                <rect key="frame" x="141" y="137" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8O9-i1-gtM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="keJ-ps-q0f" secondAttribute="trailing" constant="20" symbolic="YES" id="30f-YG-VVL"/>
+                            <constraint firstItem="keJ-ps-q0f" firstAttribute="leading" secondItem="F4O-3C-sfT" secondAttribute="leading" id="Lyf-Ly-fBH"/>
+                            <constraint firstItem="F4O-3C-sfT" firstAttribute="top" secondItem="keJ-ps-q0f" secondAttribute="bottom" constant="8" symbolic="YES" id="NDw-hg-eOM"/>
+                            <constraint firstItem="keJ-ps-q0f" firstAttribute="centerX" secondItem="R85-vg-S2H" secondAttribute="centerX" id="dPo-ZP-ed0"/>
+                            <constraint firstItem="keJ-ps-q0f" firstAttribute="trailing" secondItem="F4O-3C-sfT" secondAttribute="trailing" id="fcb-JX-YW2"/>
+                            <constraint firstItem="keJ-ps-q0f" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="kfZ-s6-3t7"/>
+                            <constraint firstItem="keJ-ps-q0f" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="nQk-z1-Hoy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="username" destination="F4O-3C-sfT" id="HOb-Fh-F02"/>
+                        <segue destination="Jcx-PN-STt" kind="modal" identifier="showCallScreen" id="dEc-HN-4ss"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="169" y="-28"/>
+        </scene>
+        <!--Call Screen View Controller-->
+        <scene sceneID="Dhd-9P-3si">
+            <objects>
+                <viewController id="Jcx-PN-STt" customClass="CallScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4lU-ZF-t3O"/>
+                        <viewControllerLayoutGuide type="bottom" id="vXM-Gu-6Gw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HN0-jW-zzn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User to call" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AU5-9A-pfh">
+                                <rect key="frame" x="20" y="70" width="87" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UBC-bc-9cj">
+                                <rect key="frame" x="20" y="99" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-IP-Mlk">
+                                <rect key="frame" x="120" y="137" width="80" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="47p-Sv-UMk"/>
+                                </constraints>
+                                <state key="normal" title="Call">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="callUser:" destination="Jcx-PN-STt" eventType="touchUpInside" id="8aq-mB-2sF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UBC-bc-9cj" firstAttribute="top" secondItem="AU5-9A-pfh" secondAttribute="bottom" constant="8" symbolic="YES" id="6Zm-S9-q5s"/>
+                            <constraint firstItem="UBC-bc-9cj" firstAttribute="leading" secondItem="AU5-9A-pfh" secondAttribute="leading" id="XAa-Vd-rmn"/>
+                            <constraint firstItem="gXq-IP-Mlk" firstAttribute="top" secondItem="UBC-bc-9cj" secondAttribute="bottom" constant="8" symbolic="YES" id="bp3-Uk-z4t"/>
+                            <constraint firstAttribute="trailing" secondItem="UBC-bc-9cj" secondAttribute="trailing" constant="20" symbolic="YES" id="gYK-4l-ON7"/>
+                            <constraint firstItem="AU5-9A-pfh" firstAttribute="top" secondItem="4lU-ZF-t3O" secondAttribute="bottom" constant="50" id="mBh-Ho-xJf"/>
+                            <constraint firstItem="AU5-9A-pfh" firstAttribute="leading" secondItem="HN0-jW-zzn" secondAttribute="leading" constant="20" symbolic="YES" id="the-gb-ys5"/>
+                            <constraint firstItem="UBC-bc-9cj" firstAttribute="centerX" secondItem="gXq-IP-Mlk" secondAttribute="centerX" id="vYU-wp-aAc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="callButton" destination="gXq-IP-Mlk" id="tSK-ki-tFa"/>
+                        <outlet property="remoteUsername" destination="UBC-bc-9cj" id="B2C-xB-J9v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qIz-cR-P5k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652" y="-28"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
