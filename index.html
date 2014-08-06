@@ -174,7 +174,7 @@
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
+    (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
@@ -234,15 +234,15 @@ pod 'SinchRTC'
         <ul class="task-list">
             <li>Select objective-c class and click next</li>
             <li>
-                Name the file <em>LoginViewController</em>
-                Make sure UIViewController is the subclass.
+    Name the file <em>LoginViewController</em>
+    Make sure UIViewController is the subclass.
             </li>
         </ul><p>Now, open the <strong>Main.Storyboard</strong> and add </p>
 
         <ul class="task-list">
             <li>A label with Username, </li>
             <li>
-                Empty textbox<br>
+    Empty textbox<br>
             </li>
             <li>Button with the label Login</li>
         </ul>
@@ -263,46 +263,46 @@ pod 'SinchRTC'
             <h2>Login action</h2>
 
             <p>
-                When the user clicks on the login button you want to present the CallScreenView.<br>
-                Add a a new view to your storyboard with:
+    When the user clicks on the login button you want to present the CallScreenView.<br>
+    Add a a new view to your storyboard with:
             </p>
 
             <ul class="task-list">
-                <li>A label with User to call, </li>
-                <li>
-                    Empty textbox<br>
-                </li>
-                <li>Button with the label Call</li>
+    <li>A label with User to call, </li>
+    <li>
+        Empty textbox<br>
+    </li>
+    <li>Button with the label Call</li>
             </ul><p>
-                Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen.<br>
-                The storyboard should now look like this:
+    Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen.<br>
+    The storyboard should now look like this:
             </p>
             <div style="text-align:center;">
-                <img src="readme_images/allscreensID.png" alt="" style="max-width:100%;">
+    <img src="readme_images/allscreensID.png" alt="" style="max-width:100%;">
             </div>
             <p>Open <strong>LoginViewController.m</strong> and add the login method for the button.</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">login:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="n">text</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="p">)</span> <span class="p">{</span>
-                <span class="p">[</span><span class="nb">self</span> <span class="nl">performSegueWithIdentifier</span><span class="p">:</span><span class="s">@"showCallScreen"</span> <span class="nl">sender</span><span class="p">:</span><span class="n">username</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
-                <span class="p">}</span>
+    <pre><span class="p">-(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">login:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="n">text</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="nl">performSegueWithIdentifier</span><span class="p">:</span><span class="s">@"showCallScreen"</span> <span class="nl">sender</span><span class="p">:</span><span class="n">username</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre>
             </div>
 
             <p>
-                The above code will perform the Segue if the username is not empty. To pass the username to the call screen you need to implement prepareForSegue <br>
-                add the following code to <strong>LoginViewController.m</strong>
+    The above code will perform the Segue if the username is not empty. To pass the username to the call screen you need to implement prepareForSegue <br>
+    add the following code to <strong>LoginViewController.m</strong>
             </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="bp">UIStoryboardSegue</span><span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+    <pre><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="bp">UIStoryboardSegue</span><span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
 <span class="p">{</span>
-                <span class="c1">// check that its the right segue</span>
-                <span class="k">if</span> <span class="p">([</span><span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="nl">isEqualToString</span><span class="p">:</span><span class="s">@"showCallScreen"</span><span class="p">])</span>     <span class="p">{</span>
-                <span class="c1">// TODO, get the view controller for call screen</span>
-                <span class="p">}</span>
+    <span class="c1">// check that its the right segue</span>
+    <span class="k">if</span> <span class="p">([</span><span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="nl">isEqualToString</span><span class="p">:</span><span class="s">@"showCallScreen"</span><span class="p">])</span>     <span class="p">{</span>
+    <span class="c1">// TODO, get the view controller for call screen</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -312,13 +312,13 @@ pod 'SinchRTC'
             <h2>Adding a CallScreenViewController</h2>
 
             <p>
-                Create a new ViewController called <strong>CallScreenViewController</strong>. This controller will handle all call activity in the app.<br>
-                Set the custom class of the view Callscreen to <strong>CallScreenViewController</strong> in interfacebuilder.<br>
-                Open the <strong>CallScreenViewController.h</strong> and add the property
+    Create a new ViewController called <strong>CallScreenViewController</strong>. This controller will handle all call activity in the app.<br>
+    Set the custom class of the view Callscreen to <strong>CallScreenViewController</strong> in interfacebuilder.<br>
+    Open the <strong>CallScreenViewController.h</strong> and add the property
             </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+    <pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
 <span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span>
 <span class="k">@property</span> <span class="bp">NSString</span><span class="o">*</span> <span class="n">username</span><span class="p">;</span>
 <span class="k">@end</span>
@@ -326,22 +326,22 @@ pod 'SinchRTC'
             </div>
 
             <p>
-                also add <code>@synthesize username</code> to the <strong>CallScreenViewController.m</strong> file.<br>
-                Go back to LoginViewController.m and add <code>#import "CallScreenViewController.h"</code> to your imports. <br>
-                Change <code>-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender</code> <br>
-                to:
+    also add <code>@synthesize username</code> to the <strong>CallScreenViewController.m</strong> file.<br>
+    Go back to LoginViewController.m and add <code>#import "CallScreenViewController.h"</code> to your imports. <br>
+    Change <code>-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender</code> <br>
+    to:
             </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="bp">UIStoryboardSegue</span><span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-                <span class="c1">// Check that it's the right segue</span>
-                <span class="k">if</span> <span class="p">([</span><span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="nl">isEqualToString</span><span class="p">:</span><span class="s">@"showCallScreen"</span><span class="p">])</span> 
-                <span class="p">{</span>
-                <span class="c1">// Get destination viewController</span>
-                <span class="n">CallScreenViewController</span> <span class="o">*</span><span class="n">vc</span> <span class="o">=</span> <span class="p">[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">];</span>
-                <span class="c1">// Set the username property of CallScreenViewController</span>
-                <span class="n">vc</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">sender</span><span class="p">;</span>
-                <span class="p">}</span>
+    <pre><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="bp">UIStoryboardSegue</span><span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
+    <span class="c1">// Check that it's the right segue</span>
+    <span class="k">if</span> <span class="p">([</span><span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="nl">isEqualToString</span><span class="p">:</span><span class="s">@"showCallScreen"</span><span class="p">])</span> 
+    <span class="p">{</span>
+    <span class="c1">// Get destination viewController</span>
+    <span class="n">CallScreenViewController</span> <span class="o">*</span><span class="n">vc</span> <span class="o">=</span> <span class="p">[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">];</span>
+    <span class="c1">// Set the username property of CallScreenViewController</span>
+    <span class="n">vc</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">sender</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="k">@end</span>
 </pre>
@@ -352,29 +352,30 @@ pod 'SinchRTC'
             <p>The CallScreenViewController will be responsible for handling all events from the Sinch client. To enable this, open <strong>CallScreenViewController.h</strong> and add the following import:</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="cp">#import &lt;Sinch/Sinch.h&gt;</span>
+    <pre><span class="cp">#import &lt;Sinch/Sinch.h&gt;</span>
 </pre>
             </div>
 
             <p>The CallScreenViewController must implement the SINCallClientDelegate and SINCallDelegate protocol. SINCallClientDelegate protocol handles events such as incoming call notification, and the  SINCallDelegate protocol handles in call events like when a call is connected or ended. </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINCallClientDelegate</span><span class="p">,</span> <span class="n">SINCallDelegate</span><span class="o">&gt;</span>
+    <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : 
+<span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINCallClientDelegate</span><span class="p">,</span> <span class="n">SINCallDelegate</span><span class="o">&gt;</span>
 </pre>
             </div>
 
             <h2>Prepare to make a call</h2>
 
             <p>
-                To make and receive calls you need an instance of the Sinch client. <br>
-                Open <strong>CallScreenViewController.m</strong> <br>
-                Add an instance variable to you CallScreenViewController.m
+    To make and receive calls you need an instance of the Sinch client. <br>
+    Open <strong>CallScreenViewController.m</strong> <br>
+    Add an instance variable to you CallScreenViewController.m
             </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> <span class="p">()</span>
+    <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> <span class="p">()</span>
 <span class="p">{</span>
-                <span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span> <span class="n">_client</span><span class="p">;</span>
+    <span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span> <span class="n">_client</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="k">@end</span>
 </pre>
@@ -383,15 +384,15 @@ pod 'SinchRTC'
             <p>Now add a method to start the client, make sure insert your application key and application secret here. When you are starting the client, everything necessary to handle calls are set up.  </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSinchClient</span> <span class="p">{</span>
-                <span class="n">_client</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sinch</span> <span class="nl">clientWithApplicationKey</span><span class="p">:</span><span class="s">@"your_key"</span>
-                <span class="nl">applicationSecret</span><span class="p">:</span><span class="s">@"your_secret"</span>
-                <span class="nl">environmentHost</span><span class="p">:</span><span class="s">@"sandbox.sinch.com"</span>
-                <span class="nl">userId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">username</span><span class="p">];</span>
-                <span class="n">_client</span><span class="p">.</span><span class="n">callClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-                <span class="p">[</span><span class="n">_client</span> <span class="nl">setSupportCalling</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
-                <span class="p">[</span><span class="n">_client</span> <span class="n">start</span><span class="p">];</span>
-                <span class="p">[</span><span class="n">_client</span> <span class="n">startListeningOnActiveConnection</span><span class="p">];</span>
+    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSinchClient</span> <span class="p">{</span>
+    <span class="n">_client</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sinch</span> <span class="nl">clientWithApplicationKey</span><span class="p">:</span><span class="s">@"your_key"</span>
+    <span class="nl">applicationSecret</span><span class="p">:</span><span class="s">@"your_secret"</span>
+    <span class="nl">environmentHost</span><span class="p">:</span><span class="s">@"sandbox.sinch.com"</span>
+    <span class="nl">userId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">username</span><span class="p">];</span>
+    <span class="n">_client</span><span class="p">.</span><span class="n">callClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">_client</span> <span class="nl">setSupportCalling</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_client</span> <span class="n">start</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_client</span> <span class="n">startListeningOnActiveConnection</span><span class="p">];</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -399,10 +400,10 @@ pod 'SinchRTC'
             <p>Replace the code in <code>viewDidLoad</code> with the following</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
 <span class="p">{</span>
-                <span class="p">[</span><span class="nb">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-                <span class="p">[</span><span class="nb">self</span> <span class="n">initSinchClient</span><span class="p">];</span>
+    <span class="p">[</span><span class="nb">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">initSinchClient</span><span class="p">];</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -412,17 +413,18 @@ pod 'SinchRTC'
             <p>Connect the user interface to enable the user to call. </p>
 
             <ul class="task-list">
-                <li>Open <strong>Main.storyboard</strong> and select the call screen. </li>
-                <li>Create an outlet for the textview call it remoteUsername</li>
-                <li>
-                    Create an action for the button that you call <code>callUser:</code>
-                    Don't forget to synthezise them in  your .m file.
-                    Your <strong>CallScreenViewController.h</strong> should now look like this:
-                </li>
+    <li>Open <strong>Main.storyboard</strong> and select the call screen. </li>
+    <li>Create an outlet for the textview call it remoteUsername</li>
+    <li>
+        Create an action for the button that you call <code>callUser:</code>
+        Don't forget to synthezise them in  your .m file.
+        Your <strong>CallScreenViewController.h</strong> should now look like this:
+    </li>
             </ul><div class="highlight highlight-objectivec">
-                <pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
+    <pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
 <span class="cp">#import &lt;Sinch/Sinch.h&gt;</span>
-<span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINCallDelegate</span><span class="p">,</span> <span class="n">SINCallClientDelegate</span><span class="o">&gt;</span>
+<span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : 
+    <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINCallDelegate</span><span class="p">,</span> <span class="n">SINCallClientDelegate</span><span class="o">&gt;</span>
 <span class="k">@property</span> <span class="bp">NSString</span><span class="o">*</span> <span class="n">username</span><span class="p">;</span>
 <span class="k">@property</span> <span class="p">(</span><span class="k">strong</span><span class="p">,</span> <span class="k">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="bp">UITextField</span> <span class="o">*</span><span class="n">remoteUsername</span><span class="p">;</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
@@ -433,17 +435,17 @@ pod 'SinchRTC'
             <p>Open <strong>CallScreenViewController.m</strong> add an instance variable for a call:</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span> <span class="n">_call</span><span class="p">;</span>
+    <pre><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span> <span class="n">_call</span><span class="p">;</span>
 </pre>
             </div>
 
             <p>When user clicks call, set up a voice conversation in callUser:</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-                <span class="n">_call</span> <span class="o">=</span> <span class="p">[</span><span class="n">_client</span><span class="p">.</span><span class="n">callClient</span> <span class="nl">callUserWithId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">remoteUsername</span><span class="p">.</span><span class="n">text</span><span class="p">];</span> <span class="c1">// Create the call</span>
-                <span class="n">_call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span> <span class="c1">// Listen for events on self</span>
-                <span class="p">}</span>
+<pre><span class="p">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
+    <span class="n">_call</span> <span class="o">=</span> <span class="p">[</span><span class="n">_client</span><span class="p">.</span><span class="n">callClient</span> <span class="nl">callUserWithId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">remoteUsername</span><span class="p">.</span><span class="n">text</span><span class="p">];</span> <span class="c1">// Create the call</span>
+    <span class="n">_call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span> <span class="c1">// Listen for events on self</span>
+<span class="p">}</span>
 </pre>
             </div>
 
@@ -452,33 +454,33 @@ pod 'SinchRTC'
             <p>To answer a call you need to add code in didReceiveIncomingCall. In this example you will accept all calls, but in a normal application you would display a UI where the user could accept or reject a call. </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">client:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCallClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="nf">didReceiveIncomingCall:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-                <span class="c1">// For now we are just going to answer calls, </span>
-                <span class="c1">// in a normal app you would show in incoming call screen</span>
-                <span class="n">call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-                <span class="n">_call</span> <span class="o">=</span> <span class="n">call</span><span class="p">;</span>
-                <span class="p">[</span><span class="n">_call</span> <span class="n">answer</span><span class="p">];</span>
+<pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">client:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCallClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="nf">didReceiveIncomingCall:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
+    <span class="c1">// For now we are just going to answer calls, </span>
+    <span class="c1">// in a normal app you would show in incoming call screen</span>
+    <span class="n">call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
+    <span class="n">_call</span> <span class="o">=</span> <span class="n">call</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">_call</span> <span class="n">answer</span><span class="p">];</span>
 <span class="p">}</span>
 </pre>
             </div>
 
             <p>
-                Next implement the protocol for the call delegate. The different states of a phone call are: -inprogress (trying to connect), <br>
-                -established <br>
-                -ending<br>
-                These events are quite useful for as a developer, because this is where you can record start times, and make changes UI to hangup calls etc.
+    Next implement the protocol for the call delegate. The different states of a phone call are: -inprogress (trying to connect), <br>
+    -established <br>
+    -ending<br>
+    These events are quite useful for as a developer, because this is where you can record start times, and make changes UI to hangup calls etc.
             </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="cp">#pragma mark - SINCallDelegate</span>
+    <pre><span class="cp">#pragma mark - SINCallDelegate</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidProgress:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-                <span class="c1">// In this method you can play ringing tone and update ui to display progress of call.</span>
+    <span class="c1">// In this method you can play ringing tone and update ui to display progress of call.</span>
 <span class="p">}</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEstablish:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-                <span class="c1">// Called when a call connects.</span>
+    <span class="c1">// Called when a call connects.</span>
 <span class="p">}</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEnd:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-                <span class="c1">// Called when call finnished.</span>
+    <span class="c1">// Called when call finnished.</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -486,37 +488,37 @@ pod 'SinchRTC'
             <h2>Run it</h2>
 
             <ul class="task-list">
-                <li>Compile and run on the device emulator. </li>
-                <li>
-                    Log in as <strong>A</strong>
-                </li>
-                <li>Compile and run on your iPhone </li>
-                <li>
-                    Log in as <strong>B</strong>
-                    On the iphone type <strong>A</strong> in the to user call box, press <strong>Call</strong>.
-                    For testing I usually turn on some music on the computer and step outside the room to and listen in the iPhone.
-                </li>
+    <li>Compile and run on the device emulator. </li>
+    <li>
+        Log in as <strong>A</strong>
+    </li>
+    <li>Compile and run on your iPhone </li>
+    <li>
+        Log in as <strong>B</strong>
+        On the iphone type <strong>A</strong> in the to user call box, press <strong>Call</strong>.
+        For testing I usually turn on some music on the computer and step outside the room to and listen in the iPhone.
+    </li>
             </ul><h2>Hanging up the call</h2>
 
             <p>
-                It pretty nice to be able to have a way to end the call. <br>
-                Open up <strong>Main.storyboard</strong> and crate an outlet called callButton from the call call button.
+    It pretty nice to be able to have a way to end the call. <br>
+    Open up <strong>Main.storyboard</strong> and crate an outlet called callButton from the call call button.
             </p>
 
             <p>
-                You want to change the text of the call button when a call changes state. Open <strong>CallScreenViewController.m</strong> add  callButton to your @synthezise.<br>
-                Change the delegate methods.
+    You want to change the text of the call button when a call changes state. Open <strong>CallScreenViewController.m</strong> add  callButton to your @synthezise.<br>
+    Change the delegate methods.
             </p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEstablish:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-                <span class="c1">// Change to hangup when the call is connected</span>
-                <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">callButton</span> <span class="nl">setTitle</span><span class="p">:</span><span class="s">@"Hang up"</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
+    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEstablish:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
+    <span class="c1">// Change to hangup when the call is connected</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">callButton</span> <span class="nl">setTitle</span><span class="p">:</span><span class="s">@"Hang up"</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
 <span class="p">}</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEnd:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-                <span class="c1">// Change to call again</span>
-                <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">callButton</span> <span class="nl">setTitle</span><span class="p">:</span><span class="s">@"Call"</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
-                <span class="n">_call</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+<span class="p">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEnd:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
+    <span class="c1">// Change to call again</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">callButton</span> <span class="nl">setTitle</span><span class="p">:</span><span class="s">@"Call"</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
+    <span class="n">_call</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -524,17 +526,15 @@ pod 'SinchRTC'
             <p>You also need to change the callUser function to hang up a call instead of dialing if a call is in progress,</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">_call</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span>
-                <span class="p">{</span>
-                <span class="n">_call</span> <span class="o">=</span> <span class="p">[</span><span class="n">_client</span><span class="p">.</span><span class="n">callClient</span> <span class="nl">callUserWithId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">remoteUserId</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
-                <span class="n">_call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-                <span class="p">}</span>
-                <span class="k">else</span>
-                <span class="p">{</span>
-                <span class="p">[</span><span class="n">_call</span> <span class="n">hangup</span><span class="p">];</span>
-                <span class="n">_call</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-                <span class="p">}</span>
+<pre><span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_call</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span><span class="p">{</span>
+        <span class="n">_call</span> <span class="o">=</span> <span class="p">[</span><span class="n">_client</span><span class="p">.</span><span class="n">callClient</span> <span class="nl">callUserWithId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">remoteUserId</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
+      <span class="n">_call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="p">[</span><span class="n">_call</span> <span class="n">hangup</span><span class="p">];</span>
+      <span class="n">_call</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -544,40 +544,40 @@ pod 'SinchRTC'
             <p>If you are running in to problems, there are a couple of easy things you can check:</p>
 
             <ul class="task-list">
-                <li>Make sure application key and secret are correct </li>
-                <li>Do you have an provisioning profile set</li>
-                <li>If it still doesn't work, don't hesitate to email me at <a href="mailto:christian@sinch.com">christian@sinch.com</a> to ask questions. </li>
+    <li>Make sure application key and secret are correct </li>
+    <li>Do you have an provisioning profile set</li>
+    <li>If it still doesn't work, don't hesitate to email me at <a href="mailto:christian@sinch.com">christian@sinch.com</a> to ask questions. </li>
             </ul><h2>Add logging</h2>
 
             <p>To help you determine what is wrong, you can add logging on the <em>SINClient</em>. In  <strong>CallScreenViewController.h</strong> add the following protocol SINClientDelegate:</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINClientDelegate</span><span class="p">,</span> <span class="n">SINCallClientDelegate</span><span class="p">,</span> <span class="n">SINCallDelegate</span><span class="o">&gt;</span>
+    <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINClientDelegate</span><span class="p">,</span> <span class="n">SINCallClientDelegate</span><span class="p">,</span> <span class="n">SINCallDelegate</span><span class="o">&gt;</span>
 </pre>
             </div>
 
             <p>Also add the follwing methids to <strong>CallScreenViewController.h</strong>:</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="cp">#pragma mark - SINClientDelegate</span>
+    <pre><span class="cp">#pragma mark - SINClientDelegate</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">clientDidStart:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="p">{</span>
-                <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Sinch client started (version: %@)"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sinch</span> <span class="n">version</span><span class="p">]);</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Sinch client started (version: %@)"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sinch</span> <span class="n">version</span><span class="p">]);</span>
 <span class="p">}</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">clientDidStop:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="p">{</span>
-                <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Sinch client stopped"</span><span class="p">);</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Sinch client stopped"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">clientDidFail:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="nf">error:</span><span class="p">(</span><span class="bp">NSError</span><span class="o">*</span><span class="p">)</span><span class="nv">error</span> <span class="p">{</span>
-                <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">);</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">client:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span>
-                <span class="nf">logMessage:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">message</span>
-                <span class="nf">area:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">area</span>
-                <span class="nf">severity:</span><span class="p">(</span><span class="n">SINLogSeverity</span><span class="p">)</span><span class="nv">severity</span>
-                <span class="nf">timestamp:</span><span class="p">(</span><span class="bp">NSDate</span> <span class="o">*</span><span class="p">)</span><span class="nv">timestamp</span> <span class="p">{</span>
-                <span class="c1">// If you want all messages remove the if statement</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">severity</span> <span class="o">==</span> <span class="n">SINLogSeverityCritical</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">NSLog</span><span class="p">(</span><span class="s">@"%@"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
-                <span class="p">}</span>
+    <span class="nf">logMessage:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">message</span>
+    <span class="nf">area:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">area</span>
+    <span class="nf">severity:</span><span class="p">(</span><span class="n">SINLogSeverity</span><span class="p">)</span><span class="nv">severity</span>
+    <span class="nf">timestamp:</span><span class="p">(</span><span class="bp">NSDate</span> <span class="o">*</span><span class="p">)</span><span class="nv">timestamp</span> <span class="p">{</span>
+    <span class="c1">// If you want all messages remove the if statement</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">severity</span> <span class="o">==</span> <span class="n">SINLogSeverityCritical</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"%@"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre>
             </div>
@@ -585,17 +585,17 @@ pod 'SinchRTC'
             <p>Set the delegate of the SINClient in <code>-(void)initSinchClientWithUserId:</code> as follows:</p>
 
             <div class="highlight highlight-objectivec">
-                <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSinchClientWithUserId:</span><span class="p">(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">userId</span> <span class="p">{</span>
-                <span class="n">_client</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sinch</span> <span class="nl">clientWithApplicationKey</span><span class="p">:</span><span class="s">@"your key"</span>
-                <span class="nl">applicationSecret</span><span class="p">:</span><span class="s">@"your secret"</span>
-                <span class="nl">environmentHost</span><span class="p">:</span><span class="s">@"sandbox.sinch.com"</span>
-                <span class="nl">userId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">userName</span><span class="p">];</span>
-                <span class="c1">// Add logging by setting delegate to self</span>
-                <span class="n">_client</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-                <span class="p">[</span><span class="n">_client</span> <span class="nl">setSupportCalling</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
-                <span class="n">_client</span><span class="p">.</span><span class="n">callClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-                <span class="p">[</span><span class="n">_client</span> <span class="n">start</span><span class="p">];</span>
-                <span class="p">[</span><span class="n">_client</span> <span class="n">startListeningOnActiveConnection</span><span class="p">];</span>
+    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSinchClientWithUserId:</span><span class="p">(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">userId</span> <span class="p">{</span>
+    <span class="n">_client</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sinch</span> <span class="nl">clientWithApplicationKey</span><span class="p">:</span><span class="s">@"your key"</span>
+    <span class="nl">applicationSecret</span><span class="p">:</span><span class="s">@"your secret"</span>
+    <span class="nl">environmentHost</span><span class="p">:</span><span class="s">@"sandbox.sinch.com"</span>
+    <span class="nl">userId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">userName</span><span class="p">];</span>
+    <span class="c1">// Add logging by setting delegate to self</span>
+    <span class="n">_client</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">_client</span> <span class="nl">setSupportCalling</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
+    <span class="n">_client</span><span class="p">.</span><span class="n">callClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">_client</span> <span class="n">start</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_client</span> <span class="n">startListeningOnActiveConnection</span><span class="p">];</span>
 <span class="p">}</span>
 </pre>
             </div>
