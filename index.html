@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>BUILDING A SIMPLE VOICE APP IN IOS</title>
@@ -16,7 +16,7 @@
         =============================================================================*/
 
         pre, code, tt {
-          font-size: 12px;
+          font-size: 16px;
           font-family: Consolas, "Liberation Mono", Courier, monospace;
         }
 
@@ -206,30 +206,28 @@
         <h2>Start</h2>
 
         <p>
-            If you don't have an account with Sinch, sign up for one at <a href="http://www.sinch.com/signup">www.sinch.com/signup</a>.<br>
-            Setup a new Application using the <a href="http://www.sinch.com/dashboard/#/apps" title="Sinch Dashboard">Dashboard</a>, and take note of you application- key and secret.
+            If you don't have an account with Sinch, sign up for one at <a href="http://www.sinch.com/signup">www.sinch.com/signup</a>. Set up a new application using the <a href="http://www.sinch.com/dashboard/#/apps" title="Sinch Dashboard">Dashboard</a>, and take note of your application key and secret. Next:
         </p>
 
         <ul class="task-list">
-            <li>Launch Xcode and create a new project (File&gt;New&gt;Project). </li>
-            <li>Select “Single View Application” and click next</li>
-            <li>Name the project 'CallingApp' and save it.</li>
-        </ul><p>The easiest way to add the Sinch SDK is to use CocoaPods, in your Xcode project directory create a <em>Podfile</em> with the content below.</p>
+            <li>Launch Xcode and create a new project (File&gt;New&gt;Project)</li>
+            <li>Select 'Single View Application' and click next</li>
+            <li>Name the project 'CallingApp' and save it</li>
+        </ul><p>The easiest way to add the Sinch SDK is to use CocoaPods. In your Xcode project directory, create a <em>Podfile</em> with the content below.</p>
 
-<pre><code>platform :ios, '7.0'
-pod 'SinchRTC'
-</code></pre>
+<div class="highlight highlight-objectivec"><pre>platform :ios, '7.0'
+pod 'SinchRTC'</pre></div>
 
-        <p>
-            Open a terminal window in your Xcode project directory and type <br><code>pod install</code><br>
-            Remember to open the workspace in Xcode when using CocoaPods.<br><em>If you are new to CocoaPods  go to <a href="http://cocoapods.org/">cocoapods.org</a> to learn how to install it</em>
+        <p>Now, open a terminal window in your Xcode project directory and type <code>pod install</code>. Remember to open the workspace in Xcode when using CocoaPods.
         </p>
+        
+        <p><em>Note: If you are new to CocoaPods  go to <a href="http://cocoapods.org/">cocoapods.org</a> to learn how to install it.</em></p>
 
         <h2>Login</h2>
 
-        <p>To enable app to app calling, it is necessary to start the <em>SINClient</em> with a username. In this example you will let the user type in any username they want with no password. </p>
+        <p>To enable app to app calling, it is necessary to start the <em>SINClient</em> with a username. In this example, you will let the user type in any username they want with no password.</p>
 
-        <p>Create a new ViewController (File&gt;New&gt;File)</p>
+        <p>First, create a new ViewController (File&gt;New&gt;File)</p>
 
         <ul class="task-list">
             <li>Select objective-c class and click next</li>
@@ -237,13 +235,11 @@ pod 'SinchRTC'
     Name the file <em>LoginViewController</em>
     Make sure UIViewController is the subclass.
             </li>
-        </ul><p>Now, open the <strong>Main.Storyboard</strong> and add </p>
+        </ul><p>Now, open <strong>Main.Storyboard</strong> and add </p>
 
         <ul class="task-list">
-            <li>A label with Username, </li>
-            <li>
-    Empty textbox<br>
-            </li>
+            <li>A label with Username</li>
+            <li>Empty textbox</li>
             <li>Button with the label Login</li>
         </ul>
         <div style="text-align:center;">
@@ -252,30 +248,27 @@ pod 'SinchRTC'
 
             <p>Set the custom class of the view to <strong>LoginViewController</strong>. </p>
 
-            <p>Open the Assistant Editor (View&gt;Assitant Editor&gt;Show Assistant Editor). Create an outlet for the textfield by holding the control and dragging into <strong>LoginViewController.h</strong> in the Assistant Editor name the outlet username</p>
+            <p>Next, open the Assistant Editor (View&gt;Assitant Editor&gt;Show Assistant Editor). Create an outlet for the textfield by pressing control and dragging into <strong>LoginViewController.h</strong> in the Assistant Editor. Name the outlet username.</p>
 
-            <p>Next, create an action from the button by repeating the step from above, but choose action as connection. Name the method login:</p>
+            <p>Next, create an action from the button by repeating the step from above, but choose action as connection. Name the method login.</p>
 
-            <p><em>Sometimes the assistant chooses .m files instead of .h make sure you are in the right one</em></p>
+            <p><em>Note: Sometimes the assistant chooses .m files instead of .h make sure you are in the right one</em></p>
 
             <p>Open <strong>LoginViewController.m</strong> add <code>@synthesize userName;</code> below the <a href="https://github.com/implementation" class="user-mention">@implementation</a> line.</p>
 
             <h2>Login action</h2>
 
             <p>
-    When the user clicks on the login button you want to present the CallScreenView.<br>
-    Add a a new view to your storyboard with:
+    When the user clicks on the login button, you want to present the CallScreenView. Add a new view to your storyboard with the following:
             </p>
 
             <ul class="task-list">
-    <li>A label with User to call, </li>
-    <li>
-        Empty textbox<br>
-    </li>
-    <li>Button with the label Call</li>
-            </ul><p>
-    Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen.<br>
-    The storyboard should now look like this:
+    <li>A label with User to call</li>
+    <li>Empty textbox</li>
+    <li>Button with the label Call</li></ul>
+        
+        <p>
+    Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen. The storyboard should now look like this:
             </p>
             <div style="text-align:center;">
     <img src="readme_images/allscreensID.png" alt="" style="max-width:100%;">
@@ -292,8 +285,7 @@ pod 'SinchRTC'
             </div>
 
             <p>
-    The above code will perform the Segue if the username is not empty. To pass the username to the call screen you need to implement prepareForSegue <br>
-    add the following code to <strong>LoginViewController.m</strong>
+    The above code will perform the Segue if the username is not empty. To pass the username to the call screen, you need to implement prepareForSegue. Add the following code to <strong>LoginViewController.m</strong>:
             </p>
 
             <div class="highlight highlight-objectivec">
@@ -307,14 +299,12 @@ pod 'SinchRTC'
 </pre>
             </div>
 
-            <p>Compile and run the app, and you should now see the callscreen after pressing login.</p>
+            <p>Now, compile and run the app, and you should now see the callscreen after pressing login.</p>
 
             <h2>Adding a CallScreenViewController</h2>
 
             <p>
-    Create a new ViewController called <strong>CallScreenViewController</strong>. This controller will handle all call activity in the app.<br>
-    Set the custom class of the view Callscreen to <strong>CallScreenViewController</strong> in interfacebuilder.<br>
-    Open the <strong>CallScreenViewController.h</strong> and add the property
+    Create a new ViewController and call it <strong>CallScreenViewController</strong>. This controller will handle all call activity in the app. Set the custom class of the view Callscreen to <strong>CallScreenViewController</strong> in interfacebuilder. Then, open the <strong>CallScreenViewController.h</strong> and add the following property:
             </p>
 
             <div class="highlight highlight-objectivec">
@@ -326,10 +316,7 @@ pod 'SinchRTC'
             </div>
 
             <p>
-    also add <code>@synthesize username</code> to the <strong>CallScreenViewController.m</strong> file.<br>
-    Go back to LoginViewController.m and add <code>#import "CallScreenViewController.h"</code> to your imports. <br>
-    Change <code>-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender</code> <br>
-    to:
+    Also add <code>@synthesize username</code> to the <strong>CallScreenViewController.m</strong> file. Go back to LoginViewController.m and add <code>#import "CallScreenViewController.h"</code> to your imports. Change <code>-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender</code> to:
             </p>
 
             <div class="highlight highlight-objectivec">
@@ -367,9 +354,7 @@ pod 'SinchRTC'
             <h2>Prepare to make a call</h2>
 
             <p>
-    To make and receive calls you need an instance of the Sinch client. <br>
-    Open <strong>CallScreenViewController.m</strong> <br>
-    Add an instance variable to you CallScreenViewController.m
+    To make and receive calls you will need an instance of the Sinch client. Open <strong>CallScreenViewController.m</strong> and add the following instance variable:
             </p>
 
             <div class="highlight highlight-objectivec">
@@ -408,12 +393,12 @@ pod 'SinchRTC'
 </pre>
             </div>
 
-            <h2>Making a call</h2>
+            <h2>Make a call</h2>
 
-            <p>Connect the user interface to enable the user to call. </p>
+            <p>Follow these steps to connect the user interface to enable the user to call:</p>
 
             <ul class="task-list">
-    <li>Open <strong>Main.storyboard</strong> and select the call screen. </li>
+    <li>Open <strong>Main.storyboard</strong> and select the call screen</li>
     <li>Create an outlet for the textview call it remoteUsername</li>
     <li>
         Create an action for the button that you call <code>callUser:</code>
@@ -465,10 +450,7 @@ pod 'SinchRTC'
             </div>
 
             <p>
-    Next implement the protocol for the call delegate. The different states of a phone call are: -inprogress (trying to connect), <br>
-    -established <br>
-    -ending<br>
-    These events are quite useful for as a developer, because this is where you can record start times, and make changes UI to hangup calls etc.
+    Next, you will implement the protocol for the call delegate. The different states of a phone call are: inprogress (trying to connect), established, and ending. These events are quite useful as a developer, because this is where you can record start times, make changes UI to hangup calls, etc.
             </p>
 
             <div class="highlight highlight-objectivec">
@@ -485,29 +467,29 @@ pod 'SinchRTC'
 </pre>
             </div>
 
-            <h2>Run it</h2>
+            <h2>Run the app</h2>
 
             <ul class="task-list">
-    <li>Compile and run on the device emulator. </li>
+    <li>Compile and run on the device emulator</li>
     <li>
         Log in as <strong>A</strong>
     </li>
     <li>Compile and run on your iPhone </li>
-    <li>
-        Log in as <strong>B</strong>
-        On the iphone type <strong>A</strong> in the to user call box, press <strong>Call</strong>.
-        For testing I usually turn on some music on the computer and step outside the room to and listen in the iPhone.
-    </li>
-            </ul><h2>Hanging up the call</h2>
+    <li>Log in as <strong>B</strong></li>
+    <li>On the iphone, type <strong>A</strong> in the 'to user' box,  and press 'call'.</li>
+
+            </ul>
+        
+         <p>(For testing, I usually turn on some music on the computer and step outside the room to and listen in the iPhone.)</p>
+        
+        <h2>Hanging up the call</h2>
 
             <p>
-    It pretty nice to be able to have a way to end the call. <br>
-    Open up <strong>Main.storyboard</strong> and crate an outlet called callButton from the call call button.
+    It's pretty nice to be able to have a way to end the call. Open up <strong>Main.storyboard</strong> and create an outlet called 'callButton' from the call button.
             </p>
 
             <p>
-    You want to change the text of the call button when a call changes state. Open <strong>CallScreenViewController.m</strong> add  callButton to your @synthezise.<br>
-    Change the delegate methods.
+    You will want to change the text of the call button when a call changes state. Open <strong>CallScreenViewController.m</strong> add  callButton to your @synthezise and change the delegate methods:
             </p>
 
             <div class="highlight highlight-objectivec">
@@ -523,7 +505,7 @@ pod 'SinchRTC'
 </pre>
             </div>
 
-            <p>You also need to change the callUser function to hang up a call instead of dialing if a call is in progress,</p>
+            <p>You also need to change the callUser function to hang up a call instead of dialing if a call is in progress:</p>
 
             <div class="highlight highlight-objectivec">
 <pre><span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
@@ -541,11 +523,11 @@ pod 'SinchRTC'
 
             <h2>Problems</h2>
 
-            <p>If you are running in to problems, there are a couple of easy things you can check:</p>
+            <p>If you are running into problems, there are a couple of easy things you can check:</p>
 
             <ul class="task-list">
     <li>Make sure application key and secret are correct </li>
-    <li>Do you have an provisioning profile set</li>
+    <li>Do you have an provisioning profile set?</li>
     <li>If it still doesn't work, don't hesitate to email me at <a href="mailto:christian@sinch.com">christian@sinch.com</a> to ask questions. </li>
             </ul><h2>Add logging</h2>
 
@@ -556,7 +538,7 @@ pod 'SinchRTC'
 </pre>
             </div>
 
-            <p>Also add the follwing methids to <strong>CallScreenViewController.h</strong>:</p>
+            <p>Also add the follwing methods to <strong>CallScreenViewController.h</strong>:</p>
 
             <div class="highlight highlight-objectivec">
     <pre><span class="cp">#pragma mark - SINClientDelegate</span>
