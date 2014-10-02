@@ -63,27 +63,21 @@ When the user clicks on the login button, you want to present the CallScreenView
 
 Open **LoginViewController.m** and add the login method for the button.
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">login:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="n">text</span> <span class="o">!=</span> <span class="nb">nil</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="p">[</span><span class="nb">self</span> <span class="nl">performSegueWithIdentifier</span><span class="p">:</span><span class="s">@"showCallScreen"</span> <span class="nl">sender</span><span class="p">:</span><span class="n">username</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	-(IBAction)login:(id)sender {
+	    if (username.text != nil ) {
+	    [self performSegueWithIdentifier:@"showCallScreen" sender:username.text];
+	    }
+	}
 
-    The above code will perform the Segue if the username is not empty. To pass the username to the call screen, you need to implement prepareForSegue. Add the following code to **LoginViewController.m**:
+The above code will perform the Segue if the username is not empty. To pass the username to the call screen, you need to implement prepareForSegue. Add the following code to **LoginViewController.m**:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="bp">UIStoryboardSegue</span><span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
-<span class="p">{</span>
-    <span class="c1">// check that its the right segue</span>
-    <span class="k">if</span> <span class="p">([</span><span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="nl">isEqualToString</span><span class="p">:</span><span class="s">@"showCallScreen"</span><span class="p">])</span>     <span class="p">{</span>
-    <span class="c1">// TODO, get the view controller for call screen</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+	{
+	    // check that its the right segue
+	    if ([segue.identifier isEqualToString:@"showCallScreen"])     {
+	    // TODO, get the view controller for call screen
+	    }
+	}
 
 Now, compile and run the app, and you should now see the callscreen after pressing login.
 
@@ -91,87 +85,66 @@ Now, compile and run the app, and you should now see the callscreen after pressi
 
 Create a new ViewController and call it **CallScreenViewController**. This controller will handle all call activity in the app. Set the custom class of the view Callscreen to **CallScreenViewController** in interfacebuilder. Then, open the **CallScreenViewController.h** and add the following property:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-<span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span>
-<span class="k">@property</span> <span class="bp">NSString</span><span class="o">*</span> <span class="n">username</span><span class="p">;</span>
-<span class="k">@end</span>
-</pre>
-            </div>
+	#import <UIKit/UIKit.h>
+	@interface CallScreenViewController : UIViewController
+	@property NSString* username;
+	@end
 
 Also add `@synthesize username` to the **CallScreenViewController.m** file. Go back to LoginViewController.m and add `#import "CallScreenViewController.h"` to your imports. Change `-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender` to:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">prepareForSegue:</span><span class="p">(</span><span class="bp">UIStoryboardSegue</span><span class="o">*</span><span class="p">)</span><span class="nv">segue</span> <span class="nf">sender:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-    <span class="c1">// Check that it's the right segue</span>
-    <span class="k">if</span> <span class="p">([</span><span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="nl">isEqualToString</span><span class="p">:</span><span class="s">@"showCallScreen"</span><span class="p">])</span> 
-    <span class="p">{</span>
-    <span class="c1">// Get destination viewController</span>
-    <span class="n">CallScreenViewController</span> <span class="o">*</span><span class="n">vc</span> <span class="o">=</span> <span class="p">[</span><span class="n">segue</span> <span class="n">destinationViewController</span><span class="p">];</span>
-    <span class="c1">// Set the username property of CallScreenViewController</span>
-    <span class="n">vc</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">sender</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="k">@end</span>
-</pre>
-            </div>
+	-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
+	    // Check that it's the right segue
+	    if ([segue.identifier isEqualToString:@"showCallScreen"]) 
+	    {
+	    // Get destination viewController
+	    CallScreenViewController *vc = [segue destinationViewController];
+	    // Set the username property of CallScreenViewController
+	    vc.username = sender;
+	    }
+	}
+	@end
 
 ##Call screen implementation
 
 The CallScreenViewController will be responsible for handling all events from the Sinch client. To enable this, open **CallScreenViewController.h** and add the following import:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="cp">#import &lt;Sinch/Sinch.h&gt;</span>
-</pre>
-            </div>
+	#import <Sinch/Sinch.h>
 
 The CallScreenViewController must implement the SINCallClientDelegate and SINCallDelegate protocol. SINCallClientDelegate protocol handles events such as incoming call notification, and the  SINCallDelegate protocol handles in call events like when a call is connected or ended. 
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : 
-<span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINCallClientDelegate</span><span class="p">,</span> <span class="n">SINCallDelegate</span><span class="o">&gt;</span>
-</pre>
-            </div>
+	@interface CallScreenViewController : 
+	UIViewController <SINCallClientDelegate, SINCallDelegate>
 
 ##Prepare to make a call
 
 To make and receive calls you will need an instance of the Sinch client. Open **CallScreenViewController.m** and add the following instance variable:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> <span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span> <span class="n">_client</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">@end</span>
-</pre>
-            </div>
+	@interface CallScreenViewController ()
+	{
+	    id<SINClient> _client;
+	}
+	@end
 
 Now add a method to start the client, make sure insert your application key and application secret here. When you are starting the client, everything necessary to handle calls are set up.  
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSinchClient</span> <span class="p">{</span>
-    <span class="n">_client</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sinch</span> <span class="nl">clientWithApplicationKey</span><span class="p">:</span><span class="s">@"your_key"</span>
-    <span class="nl">applicationSecret</span><span class="p">:</span><span class="s">@"your_secret"</span>
-    <span class="nl">environmentHost</span><span class="p">:</span><span class="s">@"sandbox.sinch.com"</span>
-    <span class="nl">userId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">username</span><span class="p">];</span>
-    <span class="n">_client</span><span class="p">.</span><span class="n">callClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-    <span class="p">[</span><span class="n">_client</span> <span class="nl">setSupportCalling</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
-    <span class="p">[</span><span class="n">_client</span> <span class="n">start</span><span class="p">];</span>
-    <span class="p">[</span><span class="n">_client</span> <span class="n">startListeningOnActiveConnection</span><span class="p">];</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	- (void)initSinchClient {
+	    _client = [Sinch clientWithApplicationKey:@"your_key"
+	    applicationSecret:@"your_secret"
+	    environmentHost:@"sandbox.sinch.com"
+	    userId:self.username];
+	    _client.callClient.delegate = self;
+	    [_client setSupportCalling:YES];
+	    [_client start];
+	    [_client startListeningOnActiveConnection];
+	}
 
 Replace the code in `viewDidLoad` with the following
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-<span class="p">{</span>
-    <span class="p">[</span><span class="nb">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-    <span class="p">[</span><span class="nb">self</span> <span class="n">initSinchClient</span><span class="p">];</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	- (void)viewDidLoad
+	{
+	    [super viewDidLoad];
+	    [self initSinchClient];
+	}
 
 ##Make a call
 
@@ -181,65 +154,52 @@ Follow these steps to connect the user interface to enable the user to call:
 *   Create an outlet for the textview call it remoteUsername
 *   Create an action for the button that you call `callUser:`
         Don't forget to synthezise them in  your .m file.
-        Your **CallScreenViewController.h** should now look like this:<div class="highlight highlight-objectivec">
-    <pre><span class="cp">#import &lt;UIKit/UIKit.h&gt;</span>
-<span class="cp">#import &lt;Sinch/Sinch.h&gt;</span>
-<span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : 
-    <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINCallDelegate</span><span class="p">,</span> <span class="n">SINCallClientDelegate</span><span class="o">&gt;</span>
-<span class="k">@property</span> <span class="bp">NSString</span><span class="o">*</span> <span class="n">username</span><span class="p">;</span>
-<span class="k">@property</span> <span class="p">(</span><span class="k">strong</span><span class="p">,</span> <span class="k">nonatomic</span><span class="p">)</span> <span class="kt">IBOutlet</span> <span class="bp">UITextField</span> <span class="o">*</span><span class="n">remoteUsername</span><span class="p">;</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span><span class="p">;</span>
-<span class="k">@end</span>
-</pre>
-            </div>
+        Your **CallScreenViewController.h** should now look like this:
+		        
+		#import <UIKit/UIKit.h>
+		#import <Sinch/Sinch.h>
+		@interface CallScreenViewController : 
+		    UIViewController <SINCallDelegate, SINCallClientDelegate>
+		@property NSString* username;
+		@property (strong, nonatomic) IBOutlet UITextField *remoteUsername;
+		- (IBAction)callUser:(id)sender;
+		@end
 
 Open **CallScreenViewController.m** add an instance variable for a call:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span> <span class="n">_call</span><span class="p">;</span>
-</pre>
-            </div>
+	id<SINCall> _call;
 
 When user clicks call, set up a voice conversation in callUser:
 
-            <div class="highlight highlight-objectivec">
-<pre><span class="p">-</span><span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-    <span class="n">_call</span> <span class="o">=</span> <span class="p">[</span><span class="n">_client</span><span class="p">.</span><span class="n">callClient</span> <span class="nl">callUserWithId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">remoteUsername</span><span class="p">.</span><span class="n">text</span><span class="p">];</span> <span class="c1">// Create the call</span>
-    <span class="n">_call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span> <span class="c1">// Listen for events on self</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	-(IBAction)callUser:(id)sender {
+	    _call = [_client.callClient callUserWithId:self.remoteUsername.text]; // Create the call
+	    _call.delegate = self; // Listen for events on self
+	}
 
 ##Answering the call
 
 To answer a call you need to add code in didReceiveIncomingCall. In this example you will accept all calls, but in a normal application you would display a UI where the user could accept or reject a call. 
 
-            <div class="highlight highlight-objectivec">
-<pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">client:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCallClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="nf">didReceiveIncomingCall:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-    <span class="c1">// For now we are just going to answer calls, </span>
-    <span class="c1">// in a normal app you would show in incoming call screen</span>
-    <span class="n">call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-    <span class="n">_call</span> <span class="o">=</span> <span class="n">call</span><span class="p">;</span>
-    <span class="p">[</span><span class="n">_call</span> <span class="n">answer</span><span class="p">];</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	- (void)client:(id<SINCallClient>)client didReceiveIncomingCall:(id<SINCall>)call {
+	    // For now we are just going to answer calls, 
+	    // in a normal app you would show in incoming call screen
+	    call.delegate = self;
+	    _call = call;
+	    [_call answer];
+	}
 
 Next, you will implement the protocol for the call delegate. The different states of a phone call are: inprogress (trying to connect), established, and ending. These events are quite useful as a developer, because this is where you can record start times, make changes UI to hangup calls, etc.
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="cp">#pragma mark - SINCallDelegate</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidProgress:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-    <span class="c1">// In this method you can play ringing tone and update ui to display progress of call.</span>
-<span class="p">}</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEstablish:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-    <span class="c1">// Called when a call connects.</span>
-<span class="p">}</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEnd:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-    <span class="c1">// Called when call finnished.</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	#pragma mark - SINCallDelegate
+	- (void)callDidProgress:(id<SINCall>)call {
+	    // In this method you can play ringing tone and update ui to display progress of call.
+	}
+	- (void)callDidEstablish:(id<SINCall>)call {
+	    // Called when a call connects.
+	}
+	- (void)callDidEnd:(id<SINCall>)call {
+	    // Called when call finnished.
+	}
 
 ##Run the app
 
@@ -256,34 +216,28 @@ It's pretty nice to be able to have a way to end the call. Open up **Main.storyb
 
 You will want to change the text of the call button when a call changes state. Open **CallScreenViewController.m** add  callButton to your @synthezise and change the delegate methods:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEstablish:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-    <span class="c1">// Change to hangup when the call is connected</span>
-    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">callButton</span> <span class="nl">setTitle</span><span class="p">:</span><span class="s">@"Hang up"</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="p">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">callDidEnd:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINCall</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">call</span> <span class="p">{</span>
-    <span class="c1">// Change to call again</span>
-    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">callButton</span> <span class="nl">setTitle</span><span class="p">:</span><span class="s">@"Call"</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
-    <span class="n">_call</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-<span class="p">}</span>
-</pre>
-            </div>
-
+	- (void)callDidEstablish:(id<SINCall>)call {
+	    // Change to hangup when the call is connected
+	    [self.callButton setTitle:@"Hang up" forState:UIControlStateNormal];
+	}
+	-(void)callDidEnd:(id<SINCall>)call {
+	    // Change to call again
+	    [self.callButton setTitle:@"Call" forState:UIControlStateNormal];
+	    _call = nil;
+	}
+	
 You also need to change the callUser function to hang up a call instead of dialing if a call is in progress:
 
-            <div class="highlight highlight-objectivec">
-<pre><span class="p">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">callUser:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">_call</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span><span class="p">{</span>
-        <span class="n">_call</span> <span class="o">=</span> <span class="p">[</span><span class="n">_client</span><span class="p">.</span><span class="n">callClient</span> <span class="nl">callUserWithId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">remoteUserId</span><span class="p">.</span><span class="n">text</span><span class="p">];</span>
-      <span class="n">_call</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-      <span class="p">[</span><span class="n">_call</span> <span class="n">hangup</span><span class="p">];</span>
-      <span class="n">_call</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	- (IBAction)callUser:(id)sender {
+	    if (_call == nil){
+	        _call = [_client.callClient callUserWithId:self.remoteUserId.text];
+	      _call.delegate = self;
+	    }
+	    else{
+	      [_call hangup];
+	      _call = nil;
+	    }
+	}
 
 ## Problems
 
@@ -296,52 +250,42 @@ If you are running into problems, there are a couple of easy things you can chec
 
 To help you determine what is wrong, you can add logging on the _SINClient_. In  **CallScreenViewController.h** add the following protocol SINClientDelegate:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="k">@interface</span> <span class="nc">CallScreenViewController</span> : <span class="bp">UIViewController</span> <span class="o">&lt;</span><span class="n">SINClientDelegate</span><span class="p">,</span> <span class="n">SINCallClientDelegate</span><span class="p">,</span> <span class="n">SINCallDelegate</span><span class="o">&gt;</span>
-</pre>
-            </div>
+	@interface CallScreenViewController : UIViewController <SINClientDelegate, SINCallClientDelegate, SINCallDelegate>
 
 Also add the follwing methods to **CallScreenViewController.h**:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="cp">#pragma mark - SINClientDelegate</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">clientDidStart:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Sinch client started (version: %@)"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sinch</span> <span class="n">version</span><span class="p">]);</span>
-<span class="p">}</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">clientDidStop:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Sinch client stopped"</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">clientDidFail:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span> <span class="nf">error:</span><span class="p">(</span><span class="bp">NSError</span><span class="o">*</span><span class="p">)</span><span class="nv">error</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">.</span><span class="n">localizedDescription</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">client:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">SINClient</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">client</span>
-    <span class="nf">logMessage:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">message</span>
-    <span class="nf">area:</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">area</span>
-    <span class="nf">severity:</span><span class="p">(</span><span class="n">SINLogSeverity</span><span class="p">)</span><span class="nv">severity</span>
-    <span class="nf">timestamp:</span><span class="p">(</span><span class="bp">NSDate</span> <span class="o">*</span><span class="p">)</span><span class="nv">timestamp</span> <span class="p">{</span>
-    <span class="c1">// If you want all messages remove the if statement</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">severity</span> <span class="o">==</span> <span class="n">SINLogSeverityCritical</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">NSLog</span><span class="p">(</span><span class="s">@"%@"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre>
-            </div>
+	#pragma mark - SINClientDelegate
+	- (void)clientDidStart:(id<SINClient>)client {
+	    NSLog(@"Sinch client started (version: %@)", [Sinch version]);
+	}
+	- (void)clientDidStop:(id<SINClient>)client {
+	    NSLog(@"Sinch client stopped");
+	}
+	- (void)clientDidFail:(id<SINClient>)client error:(NSError*)error {
+	    NSLog(@"Error: %@", error.localizedDescription);
+	}
+	- (void)client:(id<SINClient>)client
+	    logMessage:(NSString *)message
+	    area:(NSString *)area
+	    severity:(SINLogSeverity)severity
+	    timestamp:(NSDate *)timestamp {
+	    // If you want all messages remove the if statement
+	    if (severity == SINLogSeverityCritical) {
+	    NSLog(@"%@", message);
+	    }
+	}
 
 Set the delegate of the SINClient in `-(void)initSinchClientWithUserId:` as follows:
 
-            <div class="highlight highlight-objectivec">
-    <pre><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSinchClientWithUserId:</span><span class="p">(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="nv">userId</span> <span class="p">{</span>
-    <span class="n">_client</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sinch</span> <span class="nl">clientWithApplicationKey</span><span class="p">:</span><span class="s">@"your key"</span>
-    <span class="nl">applicationSecret</span><span class="p">:</span><span class="s">@"your secret"</span>
-    <span class="nl">environmentHost</span><span class="p">:</span><span class="s">@"sandbox.sinch.com"</span>
-    <span class="nl">userId</span><span class="p">:</span><span class="nb">self</span><span class="p">.</span><span class="n">userName</span><span class="p">];</span>
-    <span class="c1">// Add logging by setting delegate to self</span>
-    <span class="n">_client</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-    <span class="p">[</span><span class="n">_client</span> <span class="nl">setSupportCalling</span><span class="p">:</span><span class="nb">YES</span><span class="p">];</span>
-    <span class="n">_client</span><span class="p">.</span><span class="n">callClient</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
-    <span class="p">[</span><span class="n">_client</span> <span class="n">start</span><span class="p">];</span>
-    <span class="p">[</span><span class="n">_client</span> <span class="n">startListeningOnActiveConnection</span><span class="p">];</span>
-<span class="p">}</span>
-</pre>
-            </div>
-        </div>
+	 - (void)initSinchClientWithUserId:(NSString*)userId {
+	    _client = [Sinch clientWithApplicationKey:@"your key"
+	    applicationSecret:@"your secret"
+	    environmentHost:@"sandbox.sinch.com"
+	    userId:self.userName];
+	    // Add logging by setting delegate to self
+	    _client.delegate = self;
+	    [_client setSupportCalling:YES];
+	    _client.callClient.delegate = self;
+	    [_client start];
+	    [_client startListeningOnActiveConnection];
+	}
