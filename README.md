@@ -11,6 +11,6 @@ Requirements
 - Some coding experience 
 
 To run this code
-
+- run pod install in the project directory
 - Add your Sinch keys to CallScreenViewController.m
 - Tweet us @SinchDev if you have any questions!
