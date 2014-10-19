@@ -1,0 +1,2 @@
+PODS_SINCHRTC_FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/SinchRTC"
+PODS_SINCHRTC_OTHER_LDFLAGS = -l"sqlite3" -l"stdc++.6.0.9" -framework "AVFoundation" -framework "AudioToolbox" -framework "Security" -framework "Sinch"

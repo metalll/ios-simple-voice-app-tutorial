@@ -41,8 +41,8 @@
 }
 
 - (void)initSinchClient {
-    _client = [Sinch clientWithApplicationKey:@“<yourkey>”
-                            applicationSecret:@“<your secret>”
+    _client = [Sinch clientWithApplicationKey:@"<yourkey>"
+                            applicationSecret:@"<yousecret>"
                               environmentHost:@"sandbox.sinch.com"
                                        userId:self.username];
     _client.callClient.delegate = self;
