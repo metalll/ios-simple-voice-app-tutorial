@@ -1,7 +1,7 @@
  
-#Building a simple voice app in iOS
+#Building a Simple Voice App in iOS
 
-In this tutorial you will learn how to use the Sinch SDK to make a voice call.  
+In this tutorial, you will learn how to use the Sinch SDK to make a voice call.  
 
 ##Start
 
@@ -18,15 +18,15 @@ pod 'SinchRTC'</pre></div>
 
 Now, open a terminal window in your Xcode project directory and type `pod install`. Remember to open the workspace in Xcode when using CocoaPods.
 
-_Note: If you are new to CocoaPods  go to [cocoapods.org](http://cocoapods.org/) to learn how to install it._
+_Note: If you are new to CocoaPods, go to [cocoapods.org](http://cocoapods.org/) to learn how to install it._
 
 ##Login
 
-To enable app to app calling, it is necessary to start the _SINClient_ with a username. In this example, you will let the user type in any username they want with no password.
+To enable app-to-app calling, you must start the _SINClient_ with a username. In this example, you will let the user type in any username he or she wants with no password.
 
 First, create a new ViewController (File&gt;New&gt;File)
 
-*   Select objective-c class and click next
+*   Select objective-c class and click Next
 *   Name the file _LoginViewController_
     Make sure UIViewController is the subclass.
 
@@ -43,9 +43,9 @@ Set the custom class of the view to **LoginViewController**.
 
 Next, open the Assistant Editor (View&gt;Assitant Editor&gt;Show Assistant Editor). Create an outlet for the textfield by pressing control and dragging into **LoginViewController.h** in the Assistant Editor. Name the outlet username.
 
-Next, create an action from the button by repeating the step from above, but choose action as connection. Name the method login.
+Create an action from the button by repeating the step from above, but choose action as connection. Name the method login.
 
-_Note: Sometimes the assistant chooses .m files instead of .h make sure you are in the right one_
+_Note: Sometimes the assistant chooses **.m** files instead of **.h**. Make sure you are in the right one._
 
 Open **LoginViewController.m** add `@synthesize userName;` below the [@implementation](https://github.com/implementation) line.
 
@@ -57,7 +57,7 @@ When the user clicks on the login button, you want to present the CallScreenView
 *   Empty textbox
 *   Button with the label Call
 
-    Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen. The storyboard should now look like this:
+Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen. The storyboard should now look like this:
 
 ![](readme_images/allscreensID.png)
 
@@ -79,7 +79,7 @@ The above code will perform the Segue if the username is not empty. To pass the 
 	    }
 	}
 
-Now, compile and run the app, and you should now see the callscreen after pressing login.
+Now, compile and run the app, and you should see the callscreen after pressing login.
 
 ##Adding a CallScreenViewController
 
@@ -90,7 +90,7 @@ Create a new ViewController and call it **CallScreenViewController**. This contr
 	@property NSString* username;
 	@end
 
-Also add `@synthesize username` to the **CallScreenViewController.m** file. Go back to LoginViewController.m and add `#import "CallScreenViewController.h"` to your imports. Change `-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender` to:
+Also add `@synthesize username` to the **CallScreenViewController.m** file. Go back to **LoginViewController.m** and add `#import "CallScreenViewController.h"` to your imports. Change `-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender` to:
 
 	-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
 	    // Check that it's the right segue
@@ -106,18 +106,18 @@ Also add `@synthesize username` to the **CallScreenViewController.m** file. Go b
 
 ##Call screen implementation
 
-The CallScreenViewController will be responsible for handling all events from the Sinch client. To enable this, open **CallScreenViewController.h** and add the following import:
+The CallScreenViewController will be responsible for handling all events from the SinchClient. To enable this, open **CallScreenViewController.h** and add the following import:
 
 	#import <Sinch/Sinch.h>
 
-The CallScreenViewController must implement the SINCallClientDelegate and SINCallDelegate protocol. SINCallClientDelegate protocol handles events such as incoming call notification, and the  SINCallDelegate protocol handles in call events like when a call is connected or ended. 
+The CallScreenViewController must implement the SINCallClientDelegate and SINCallDelegate protocol. SINCallClientDelegate protocol handles events such as incoming call notification, and the SINCallDelegate protocol handles in-call events such as when a call is connected or ended. 
 
 	@interface CallScreenViewController : 
 	UIViewController <SINCallClientDelegate, SINCallDelegate>
 
 ##Prepare to make a call
 
-To make and receive calls you will need an instance of the Sinch client. Open **CallScreenViewController.m** and add the following instance variable:
+To make and receive calls you will need an instance of the SinchClient. Open **CallScreenViewController.m** and add the following instance variable:
 
 	@interface CallScreenViewController ()
 	{
@@ -125,7 +125,7 @@ To make and receive calls you will need an instance of the Sinch client. Open **
 	}
 	@end
 
-Now add a method to start the client, make sure insert your application key and application secret here. When you are starting the client, everything necessary to handle calls are set up.  
+Now add a method to start the client, making sure to insert your application key and application secret here. When you are starting the client, everything necessary to handle calls is set up.  
 
 	- (void)initSinchClient {
 	    _client = [Sinch clientWithApplicationKey:@"your_key"
@@ -138,7 +138,7 @@ Now add a method to start the client, make sure insert your application key and 
 	    [_client startListeningOnActiveConnection];
 	}
 
-Replace the code in `viewDidLoad` with the following
+Replace the code in `viewDidLoad` with the following:
 
 	- (void)viewDidLoad
 	{
@@ -153,7 +153,8 @@ Follow these steps to connect the user interface to enable the user to call:
 *   Open **Main.storyboard** and select the call screen
 *   Create an outlet for the textview call it remoteUsername
 *   Create an action for the button that you call `callUser:`
-        Don't forget to synthezise them in  your .m file.
+
+Don't forget to synthezise them in  your **.m** file.
         Your **CallScreenViewController.h** should now look like this:
 		        
 		#import <UIKit/UIKit.h>
@@ -165,7 +166,7 @@ Follow these steps to connect the user interface to enable the user to call:
 		- (IBAction)callUser:(id)sender;
 		@end
 
-Open **CallScreenViewController.m** add an instance variable for a call:
+Open **CallScreenViewController.m** and add an instance variable for a call:
 
 	id<SINCall> _call;
 
@@ -178,7 +179,7 @@ When user clicks call, set up a voice conversation in callUser:
 
 ##Answering the call
 
-To answer a call you need to add code in didReceiveIncomingCall. In this example you will accept all calls, but in a normal application you would display a UI where the user could accept or reject a call. 
+To answer a call, you need to add code in didReceiveIncomingCall. In this example, you will accept all calls, but in a normal application you would display a UI in which the user could accept or reject a call. 
 
 	- (void)client:(id<SINCallClient>)client didReceiveIncomingCall:(id<SINCall>)call {
 	    // For now we are just going to answer calls, 
@@ -188,7 +189,7 @@ To answer a call you need to add code in didReceiveIncomingCall. In this example
 	    [_call answer];
 	}
 
-Next, you will implement the protocol for the call delegate. The different states of a phone call are: inprogress (trying to connect), established, and ending. These events are quite useful as a developer, because this is where you can record start times, make changes UI to hangup calls, etc.
+Next, you will implement the protocol for the call delegate. The different states of a phone call are: inprogress (trying to connect), established, and ending. These events are quite useful as a developer because this is where you can record start times or make changes UI to hang up calls for instance.
 
 	#pragma mark - SINCallDelegate
 	- (void)callDidProgress:(id<SINCall>)call {
@@ -206,15 +207,15 @@ Next, you will implement the protocol for the call delegate. The different state
 *   Compile and run on the device emulator
 *   Log in as **A**
 *   Compile and run on your iPhone*   Log in as **B**
-*   On the iphone, type **A** in the 'to user' box,  and press 'call'.
+*   On the iPhone, type **A** in the 'to user' box,  and press 'call'
 
-(For testing, I usually turn on some music on the computer and step outside the room to and listen in the iPhone.)
+(For testing, I usually turn on some music on the computer, step outside the room, and listen on the iPhone.)
 
 ##Hanging up the call
 
-It's pretty nice to be able to have a way to end the call. Open up **Main.storyboard** and create an outlet called 'callButton' from the call button.
+Of course, you’ll want a way to end the call. Open up **Main.storyboard** and create an outlet called 'callButton' from the call button.
 
-You will want to change the text of the call button when a call changes state. Open **CallScreenViewController.m** add  callButton to your @synthezise and change the delegate methods:
+You will want to change the text of the call button when a call changes state. Open **CallScreenViewController.m**, add callButton to your @synthezise, and change the delegate methods:
 
 	- (void)callDidEstablish:(id<SINCall>)call {
 	    // Change to hangup when the call is connected
@@ -243,16 +244,16 @@ You also need to change the callUser function to hang up a call instead of diali
 
 If you are running into problems, there are a couple of easy things you can check:
 
-*   Make sure application key and secret are correct*   Do you have an provisioning profile set?
-*   If it still doesn't work, don't hesitate to email me at [christian@sinch.com](mailto:christian@sinch.com) to ask questions.
+*   Make sure application key and secret are correct.   Do you have a provisioning profile set?
+*   If it still doesn't work, email me at [christian@sinch.com](mailto:christian@sinch.com) to ask questions.
 
 ## Add logging
 
-To help you determine what is wrong, you can add logging on the _SINClient_. In  **CallScreenViewController.h** add the following protocol SINClientDelegate:
+To help diagnose the problem, you can add logging on the _SINClient_. In  **CallScreenViewController.h**, add the following protocol SINClientDelegate:
 
 	@interface CallScreenViewController : UIViewController <SINClientDelegate, SINCallClientDelegate, SINCallDelegate>
 
-Also add the follwing methods to **CallScreenViewController.h**:
+Also add the following methods to **CallScreenViewController.h**:
 
 	#pragma mark - SINClientDelegate
 	- (void)clientDidStart:(id<SINClient>)client {
