@@ -1,11 +1,11 @@
  
-#Building a Simple Voice App in iOS
+#Building a Simple iOS VoIP App
 
-In this tutorial, you will learn how to use the Sinch SDK to make a voice call.  
+In this tutorial, you will learn how to use the Sinch SDK to make an iOS VoIP call, and build a basic calling app.
 
 ##Start
 
- If you don't have an account with Sinch, sign up for one at [www.sinch.com/signup](http://www.sinch.com/signup). Set up a new application using the [Dashboard](http://www.sinch.com/dashboard/#/apps "Sinch Dashboard"), and take note of your application key and secret. Next:
+If you don't have an account with Sinch, sign up for one at [www.sinch.com/signup](http://www.sinch.com/signup). Set up a new application using the [Dashboard](http://www.sinch.com/dashboard/#/apps "Sinch Dashboard"), and take note of your application key and secret. Next:
 
 *   Launch Xcode and create a new project (File&gt;New&gt;Project)
 *   Select 'Single View Application' and click next
@@ -13,8 +13,10 @@ In this tutorial, you will learn how to use the Sinch SDK to make a voice call.
 
 The easiest way to add the Sinch SDK is to use CocoaPods. In your Xcode project directory, create a _Podfile_ with the content below.
 
-<div class="highlight highlight-objectivec"><pre>platform :ios, '7.0'
-pod 'SinchRTC'</pre></div>
+```òbjectice-c
+platform :ios, '7.0'
+pod 'SinchRTC'
+````
 
 Now, open a terminal window in your Xcode project directory and type `pod install`. Remember to open the workspace in Xcode when using CocoaPods.
 
@@ -35,9 +37,8 @@ Now, open **Main.Storyboard** and add
 *   A label with Username
 *   Empty textbox
 *   Button with the label Login
-        <div style="text-align:center;">
-![](readme_images/loginscreen.png)
-        </div>
+
+![ios login screen](readme_images/loginscreen.png)
 
 Set the custom class of the view to **LoginViewController**. 
 
@@ -59,7 +60,7 @@ When the user clicks on the login button, you want to present the CallScreenView
 
 Add a modal segue from the files owner of LoginViewController to the above CallscreenView and name it showCallScreen. The storyboard should now look like this:
 
-![](readme_images/allscreensID.png)
+![view controller screens](readme_images/allscreensID.png)
 
 Open **LoginViewController.m** and add the login method for the button.
 
