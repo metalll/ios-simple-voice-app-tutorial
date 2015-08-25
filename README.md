@@ -217,7 +217,7 @@ Next, you will implement the protocol for the call delegate. The different state
 
 Of course, you’ll want a way to end the call. Open up **Main.storyboard** and create an outlet called 'callButton' from the call button.
 
-You will want to change the text of the call button when a call changes state. Open **CallScreenViewController.m**, add callButton to your @synthezise, and change the delegate methods:
+You will want to change the text of the call button when a call changes state. Open **CallScreenViewController.m**, add callButton to your @synthesize, and change the delegate methods:
 
 	- (void)callDidEstablish:(id<SINCall>)call {
 	    // Change to hangup when the call is connected
