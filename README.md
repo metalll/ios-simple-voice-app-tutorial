@@ -1,19 +1,20 @@
- 
 #Building a Simple iOS VoIP App
 
-In this tutorial, you will learn how to use the Sinch SDK to make an iOS VoIP call, and build a basic calling app.
+In this tutorial, you will learn how to use the Sinch SDK to make an iOS VoIP call and build a basic calling app.
 
 ##Start
 
-If you don't have an account with Sinch, sign up for one at [www.sinch.com/signup](http://www.sinch.com/signup). Set up a new application using the [Dashboard](http://www.sinch.com/dashboard/#/apps "Sinch Dashboard"), and take note of your application key and secret. Next:
+If you don't have an account with Sinch, sign up for one at [www.sinch.com/signup](http://www.sinch.com/signup). Set up a new application using the [Dashboard](http://www.sinch.com/dashboard/#/apps "Sinch Dashboard") and take note of your application key and secret. 
+
+Next:
 
 *   Launch Xcode and create a new project (File&gt;New&gt;Project)
-*   Select 'Single View Application' and click next
+*   Select 'Single View Application' and click Next
 *   Name the project 'CallingApp' and save it
 
 The easiest way to add the Sinch SDK is to use CocoaPods. In your Xcode project directory, create a _Podfile_ with the content below.
 
-```òbjectice-c
+````objective-c
 platform :ios, '7.0'
 pod 'SinchRTC'
 ````
@@ -30,7 +31,7 @@ First, create a new ViewController (File&gt;New&gt;File)
 
 *   Select objective-c class and click Next
 *   Name the file _LoginViewController_
-    Make sure UIViewController is the subclass.
+    Make sure UIViewController is the subclass
 
 Now, open **Main.Storyboard** and add 
 
@@ -42,7 +43,7 @@ Now, open **Main.Storyboard** and add
 
 Set the custom class of the view to **LoginViewController**. 
 
-Next, open the Assistant Editor (View&gt;Assitant Editor&gt;Show Assistant Editor). Create an outlet for the textfield by pressing control and dragging into **LoginViewController.h** in the Assistant Editor. Name the outlet username.
+Next, open the Assistant Editor (View&gt;Assitant Editor&gt;Show Assistant Editor). Create an outlet for the textfield by pressing Control and dragging into **LoginViewController.h** in the Assistant Editor. Name the outlet username.
 
 Create an action from the button by repeating the step from above, but choose action as connection. Name the method login.
 
@@ -80,7 +81,7 @@ The above code will perform the Segue if the username is not empty. To pass the 
 	    }
 	}
 
-Now, compile and run the app, and you should see the callscreen after pressing login.
+Now compile and run the app. You should see the callscreen after pressing login.
 
 ##Adding a CallScreenViewController
 
@@ -118,7 +119,7 @@ The CallScreenViewController must implement the SINCallClientDelegate and SINCal
 
 ##Prepare to make a call
 
-To make and receive calls you will need an instance of the SinchClient. Open **CallScreenViewController.m** and add the following instance variable:
+To make and receive calls, you will need an instance of the SinchClient. Open **CallScreenViewController.m** and add the following instance variable:
 
 	@interface CallScreenViewController ()
 	{
@@ -155,7 +156,7 @@ Follow these steps to connect the user interface to enable the user to call:
 *   Create an outlet for the textview call it remoteUsername
 *   Create an action for the button that you call `callUser:`
 
-Don't forget to synthezise them in  your **.m** file.
+Don't forget to synthesize them in your **.m** file.
         Your **CallScreenViewController.h** should now look like this:
 		        
 		#import <UIKit/UIKit.h>
@@ -180,7 +181,7 @@ When user clicks call, set up a voice conversation in callUser:
 
 ##Answering the call
 
-To answer a call, you need to add code in didReceiveIncomingCall. In this example, you will accept all calls, but in a normal application you would display a UI in which the user could accept or reject a call. 
+To answer a call, you need to add code in didReceiveIncomingCall. In this example, you will accept all calls, but in a normal application, you would display a UI in which the user could accept or reject a call. 
 
 	- (void)client:(id<SINCallClient>)client didReceiveIncomingCall:(id<SINCall>)call {
 	    // For now we are just going to answer calls, 
@@ -190,7 +191,7 @@ To answer a call, you need to add code in didReceiveIncomingCall. In this exampl
 	    [_call answer];
 	}
 
-Next, you will implement the protocol for the call delegate. The different states of a phone call are: inprogress (trying to connect), established, and ending. These events are quite useful as a developer because this is where you can record start times or make changes UI to hang up calls for instance.
+Next, you will implement the protocol for the call delegate. The different states of a phone call are: in progress (trying to connect), established, and ending. These events are quite useful as a developer because this is where you can record start times or make changes to the UI to hang up calls, for instance.
 
 	#pragma mark - SINCallDelegate
 	- (void)callDidProgress:(id<SINCall>)call {
@@ -207,7 +208,7 @@ Next, you will implement the protocol for the call delegate. The different state
 
 *   Compile and run on the device emulator
 *   Log in as **A**
-*   Compile and run on your iPhone*   Log in as **B**
+*   Compile and run on your iPhone*. Log in as **B**
 *   On the iPhone, type **A** in the 'to user' box,  and press 'call'
 
 (For testing, I usually turn on some music on the computer, step outside the room, and listen on the iPhone.)
@@ -243,9 +244,9 @@ You also need to change the callUser function to hang up a call instead of diali
 
 ## Problems
 
-If you are running into problems, there are a couple of easy things you can check:
+If you are running into problems, there are a couple of easy ways to troubleshoot.
 
-*   Make sure application key and secret are correct.   Do you have a provisioning profile set?
+*   Make sure application key and secret are correct. Do you have a provisioning profile set?
 *   If it still doesn't work, email me at [christian@sinch.com](mailto:christian@sinch.com) to ask questions.
 
 ## Add logging
